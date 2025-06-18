@@ -42,6 +42,7 @@ class Player:
 
     def update(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
+        self.aim()
 
         if self.inverted:
             self.lineColor = (153,50,204)
@@ -54,8 +55,6 @@ class Player:
         if self.inverted:
             lineX *=-1
         pygame.draw.line(screen, self.lineColor, (self.rect.x+25, self.rect.y+25), (self.rect.x+lineX+25, self.rect.y+lineY+25), 5)
-
-        self.aim()
 
         for p in self.projectiles:
             p.update(screen)
