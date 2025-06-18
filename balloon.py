@@ -11,7 +11,7 @@ class Balloon:
         self.bouyancyForce = 0.25
         self.targetY = targetY
         self.targetX = targetX
-        self.dampener = 100
+        self.dampener = 50
         self.verticalOscillationZone = verticalOscillationZone
         self.horizontalOscillationZone = horizontalOscillationZone
     
@@ -26,15 +26,25 @@ class Balloon:
         self.xSpeed = (self.targetX-self.x)/self.dampener #TODO - change 10 to be an actual value that means something
         self.x += self.xSpeed
 
+    def collision(self, projectiles, player):
+        for i in range(len(projectiles)):
+            dx = self.x - projectiles[i].x
+            dy = self.y - projectiles[i].y
+            distance = (dx ** 2 + dy ** 2) ** 0.5
+            if distance < self.size + projectiles[i].size:
+                projectiles[i].deadProjectile = True
+                i-=1
+                player.points+=1
+
     def update(self, screen):
         self.move()
         i=self.size
         while(i > 0):
-            if (self.size - i)/5 % 2 == 0:
+            if (self.size - i)/15 % 2 == 0:
                 pygame.draw.circle(screen, (255,0,0), (self.x, self.y), i)
             else:
                 pygame.draw.circle(screen, (255,255,255), ( self.x,self.y), i)
-            i-=5
+            i-=15
 
 
         
