@@ -9,9 +9,7 @@ class Projectile:
         self.x_vel = x_vel
         self.size = size
         self.gravity = 0.5
-        self.deadProjectile = False
-        
-
+        self.deadProjectile = False   
 
     def move(self):
         self.x += self.x_vel
@@ -20,5 +18,5 @@ class Projectile:
 
 
     def update(self, screen):
-        self.move()
         pygame.draw.circle(screen, self.color, (self.x, self.y),self.size)
+        self.move()

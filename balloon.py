@@ -11,7 +11,7 @@ class Balloon:
         self.bouyancyForce = 0.25
         self.targetY = targetY
         self.targetX = targetX
-        self.dampener = 50
+        self.dampener = 25
         self.verticalOscillationZone = verticalOscillationZone
         self.horizontalOscillationZone = horizontalOscillationZone
     
@@ -36,15 +36,17 @@ class Balloon:
                 i-=1
                 player.points+=1
 
-    def update(self, screen):
-        self.move()
-        i=self.size
-        while(i > 0):
+    def draw(self, screen):
+        for i in range (self.size, 0, -15):
             if (self.size - i)/15 % 2 == 0:
                 pygame.draw.circle(screen, (255,0,0), (self.x, self.y), i)
             else:
                 pygame.draw.circle(screen, (255,255,255), ( self.x,self.y), i)
-            i-=15
+
+    def update(self, screen):
+        self.move()
+        self.draw(screen)
+        
 
 
         
